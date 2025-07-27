@@ -1,12 +1,52 @@
+// lib/features/HomePosts/presentation/screens/home_posts_screen.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:posty/core/constant/styles/text_style.dart';
+import 'package:posty/core/constant/AppColors/AppColors.dart';
+import '../../../../core/constant/styles/box_shadow_styles.dart';
+import '../../../../core/constant/styles/text_style.dart';
 import '../../../../core/constant/Theme/Theme_controller.dart';
+import '../../../../core/constant/semi_lottie/loading_circle_widget.dart';
+import '../../../../core/helper/logger/dio_client.dart';
+import '../../domain/posts_abstract_repo.dart';
+import '../../data/repo/post_repo_impl.dart';
+import '../../data/datasource/api_service.dart';
+import '../controller/posts_controller.dart';
 
-class HomePostsScreen extends StatelessWidget {
-  HomePostsScreen({super.key});
+class HomePostsScreen extends StatefulWidget {
+  const HomePostsScreen({super.key});
 
-  final ThemeController themeController = Get.find<ThemeController>();
+  @override
+  State<HomePostsScreen> createState() => _HomePostsScreenState();
+}
+
+class _HomePostsScreenState extends State<HomePostsScreen> {
+  late final ThemeController themeController;
+  late final PostsController postsController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (!Get.isRegistered<ThemeController>()) {
+      Get.put(ThemeController());
+    }
+    themeController = Get.find<ThemeController>();
+
+    if (!Get.isRegistered<PostsAbstractRepository>()) {
+      final dio = createDio();
+      final apiService = ApiService(dio);
+      final repo = PostsRepoImpl(apiService);
+      Get.put<PostsAbstractRepository>(repo);
+    }
+
+    if (!Get.isRegistered<PostsController>()) {
+      final repo = Get.find<PostsAbstractRepository>();
+      Get.put(PostsController(repo));
+    }
+
+    postsController = Get.find<PostsController>();
+    postsController.GetPosts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +62,58 @@ class HomePostsScreen extends StatelessWidget {
               themeController.isDarkMode.value
                   ? Icons.dark_mode_rounded
                   : Icons.light_mode_rounded,
-              size: 35,
+              size: 28,
             ),
           )),
         ],
       ),
-      body: Column(
-        children: [
-          Center(
-            child: Text(
-              "HOME",
-              style: AppFontStyle.font18Bold,
-            ),
-          ),
-        ],
-      ),
+      body: Obx(() {
+        if (postsController.isLoading.value) {
+          return const Center(child: LoadingCircleWidget());
+        }
+
+        if (postsController.errorMessage.isNotEmpty) {
+          return Center(
+              child: Text(
+                postsController.errorMessage.value,
+                style: AppFontStyle.font16Medium,
+              ));
+        }
+
+        final posts = postsController.posts;
+
+        if (posts.isEmpty) {
+          return  Center(child: Text("No posts found",style:AppFontStyle.font18Bold));
+        }
+
+        return ListView.builder(
+          itemCount: posts.length,
+          itemBuilder: (context, index) {
+            final post = posts[index];
+            return Container(
+              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                border: Border(
+                  left: BorderSide(
+                    color:AppColor.blue,
+                    width:3, // thickness of the right border
+                  ),
+                ),
+                borderRadius: BorderRadius.circular(8), // optional, affects all corners
+                color: themeController.isDarkMode.value
+                    ? Colors.grey.shade900
+                    : Colors.white,
+                boxShadow: [AppStyles.boxShadow12blur2spread4Y],
+              ),
+              child: ListTile(
+                title: Text(post.title, style: AppFontStyle.font18Bold),
+                subtitle: Text(post.body,style: AppFontStyle.font14Regular),
+              ),
+            );
+          },
+        );
+      }),
     );
   }
 }
