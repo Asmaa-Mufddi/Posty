@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:posty/core/routing/route_string.dart';
-import '../../splash_Screen.dart';
+import '../../features/HomePosts/presentation/screens/splash_Screen.dart';
 
 
 

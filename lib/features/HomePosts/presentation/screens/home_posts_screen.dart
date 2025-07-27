@@ -6,7 +6,7 @@ import '../../../../core/constant/styles/box_shadow_styles.dart';
 import '../../../../core/constant/styles/text_style.dart';
 import '../../../../core/constant/Theme/Theme_controller.dart';
 import '../../../../core/constant/semi_lottie/loading_circle_widget.dart';
-import '../../../../core/helper/logger/dio_client.dart';
+import '../../../../core/helper/dio_client/dio_client.dart';
 import '../../domain/posts_abstract_repo.dart';
 import '../../data/repo/post_repo_impl.dart';
 import '../../data/datasource/api_service.dart';
