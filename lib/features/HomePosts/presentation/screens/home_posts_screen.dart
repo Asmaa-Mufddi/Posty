@@ -11,6 +11,7 @@ import '../../domain/posts_abstract_repo.dart';
 import '../../data/repo/post_repo_impl.dart';
 import '../../data/datasource/api_service.dart';
 import '../controller/posts_controller.dart';
+import '../widgets/post_card.dart';
 
 class HomePostsScreen extends StatefulWidget {
   const HomePostsScreen({super.key});
@@ -90,26 +91,10 @@ class _HomePostsScreenState extends State<HomePostsScreen> {
           itemCount: posts.length,
           itemBuilder: (context, index) {
             final post = posts[index];
-            return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                border: Border(
-                  left: BorderSide(
-                    color:AppColor.blue,
-                    width:3, // thickness of the right border
-                  ),
-                ),
-                borderRadius: BorderRadius.circular(8), // optional, affects all corners
-                color: themeController.isDarkMode.value
-                    ? Colors.grey.shade900
-                    : Colors.white,
-                boxShadow: [AppStyles.boxShadow12blur2spread4Y],
-              ),
-              child: ListTile(
-                title: Text(post.title, style: AppFontStyle.font18Bold),
-                subtitle: Text(post.body,style: AppFontStyle.font14Regular),
-              ),
+            return PostCard(
+              title: post.title,
+              body: post.body,
+              isDarkMode: themeController.isDarkMode.value,
             );
           },
         );
