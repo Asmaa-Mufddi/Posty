@@ -15,18 +15,6 @@
 
 ---
 
-## 🛠 Tech Stack
-
-| Tech               | Usage                                  |
-|--------------------|-----------------------------------------|
-| **Flutter**        | UI framework                           |
-| **GetX**           | State management and routing           |
-| **Dio + Retrofit** | API requests and serialization         |
-| **Firebase**       | Analytics, Crashlytics, Push Notifications |
-| **GetStorage**     | Persistent storage (e.g., theme toggle) |
-
----
-
 ## 🚀 Getting Started
 
 ```bash
