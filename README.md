@@ -1,16 +1,36 @@
-# posty
+# 📱 Posty
 
-A new Flutter project.
+**Posty** is a simple and modern Flutter app that displays a dynamic list of posts using the [JSONPlaceholder](https://jsonplaceholder.typicode.com/) API. Users can browse posts, view post details, read comments, and check user profiles — all within a responsive UI that supports both **dark** and **light** themes.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## ✨ Features
 
-A few resources to get you started if this is your first Flutter project:
+- 🔄 Fetch and display a list of posts
+- 📄 View full post details
+- 💬 Show comments for each post
+- 👤 Display user (author) profile
+- 🌓 Support for **dark & light** themes
+- ⚙️ Clean and scalable architecture
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠 Tech Stack
+
+| Tech               | Usage                                  |
+|--------------------|-----------------------------------------|
+| **Flutter**        | UI framework                           |
+| **GetX**           | State management and routing           |
+| **Dio + Retrofit** | API requests and serialization         |
+| **Firebase**       | Analytics, Crashlytics, Push Notifications |
+| **GetStorage**     | Persistent storage (e.g., theme toggle) |
+
+---
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/Asmaa-Mufddi/Posty.git
+cd Posty
+flutter pub get
+flutter run
