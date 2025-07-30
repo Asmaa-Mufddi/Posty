@@ -1,4 +1,4 @@
-# 📱 Post Viewer App
+# 📱 Posty
 
 A simple Flutter app that displays posts and comments using the [JSONPlaceholder API](https://jsonplaceholder.typicode.com). The app uses **GetX** for state management, **Dio + Retrofit** for network calls, and **Firebase** for analytics, crash reporting, and push notifications.
 
@@ -62,8 +62,8 @@ dev_dependencies:
 1. **Clone the repo**
 
    ```bash
-   git clone https://github.com/your-repo/post_viewer_app.git
-   cd post_viewer_app
+   git clone https://github.com/your-repo/posty.git
+   cd posty
    ```
 
 2. **Install dependencies**
