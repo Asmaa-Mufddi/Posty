@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/constant/styles/text_style.dart';
@@ -72,6 +73,14 @@ class _HomePostsScreenState extends State<HomePostsScreen> {
             }, icon:Icon(Icons.notifications_active_outlined,size:24,))
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          FirebaseCrashlytics.instance.crash();
+        },
+        backgroundColor: Colors.red,
+        tooltip: 'Force Crash',
+        child: const Icon(Icons.warning),
       ),
       body: Obx(() {
         if (postsController.isLoading.value) {

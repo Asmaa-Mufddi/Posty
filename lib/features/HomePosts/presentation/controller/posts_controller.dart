@@ -33,7 +33,7 @@ class PostsController extends GetxController {
   }
 
   /// get all posts
-  void getPosts() async {
+  Future<void> getPosts() async {
     try {
       isLoading.value = true;
       final result = await repo.getPosts();
