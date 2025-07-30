@@ -3,7 +3,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:posty/core/constant/styles/text_style.dart';
 import 'package:posty/features/HomePosts/presentation/screens/home_posts_screen.dart';
 
-import '../../../../core/constant/AppColors/AppColors.dart';
+import '../../core/constant/AppColors/AppColors.dart';
 
 class Splash extends StatefulWidget {
   @override

@@ -7,13 +7,15 @@ part of 'post_model.dart';
 // **************************************************************************
 
 PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
-  id: (json['id'] as num).toInt(),
-  title: json['title'] as String,
-  body: json['body'] as String,
+  id: (json['id'] as num?)?.toInt() ?? 0,
+  userId: (json['userId'] as num?)?.toInt() ?? 0,
+  title: json['title'] as String? ?? '',
+  body: json['body'] as String? ?? '',
 );
 
 Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{
   'id': instance.id,
+  'userId': instance.userId,
   'title': instance.title,
   'body': instance.body,
 };

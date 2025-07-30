@@ -5,12 +5,13 @@ import 'core/constant/Theme/App_Theme.dart';
 import 'core/constant/Theme/Theme_controller.dart';
 import 'core/routing/route_string.dart';
 import 'core/routing/router.dart';
+import 'core/helper/firebase/notification_manger.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init(); // Required to use GetStorage
-
+  await NotificationManager.init();
+  await GetStorage.init();
   runApp(MyApp());
 }
 
@@ -23,11 +24,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,      // your defined light theme
-      darkTheme: AppTheme.darkTheme,   // your defined dark theme
-      themeMode: themeController.theme, // controls light/dark based on saved preference
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: themeController.theme,
       initialRoute: splashRoute,
-      onGenerateRoute: generateRoute,
+      getPages: appRoutes,
+
     );
   }
 }

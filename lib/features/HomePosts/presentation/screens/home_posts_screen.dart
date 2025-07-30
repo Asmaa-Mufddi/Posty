@@ -1,12 +1,10 @@
-// lib/features/HomePosts/presentation/screens/home_posts_screen.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:posty/core/constant/AppColors/AppColors.dart';
-import '../../../../core/constant/styles/box_shadow_styles.dart';
 import '../../../../core/constant/styles/text_style.dart';
 import '../../../../core/constant/Theme/Theme_controller.dart';
 import '../../../../core/constant/semi_lottie/loading_circle_widget.dart';
 import '../../../../core/helper/dio_client/dio_client.dart';
+import '../../../../core/routing/route_string.dart';
 import '../../domain/posts_abstract_repo.dart';
 import '../../data/repo/post_repo_impl.dart';
 import '../../data/datasource/api_service.dart';
@@ -46,7 +44,7 @@ class _HomePostsScreenState extends State<HomePostsScreen> {
     }
 
     postsController = Get.find<PostsController>();
-    postsController.GetPosts();
+    postsController.getPosts();
   }
 
   @override
@@ -66,6 +64,13 @@ class _HomePostsScreenState extends State<HomePostsScreen> {
               size: 28,
             ),
           )),
+          SizedBox(width:10,),
+          Padding(
+            padding: const EdgeInsets.only(right:18.0),
+            child:IconButton(onPressed: (){
+              Get.toNamed(NotificationScreenRoute);
+            }, icon:Icon(Icons.notifications_active_outlined,size:24,))
+          )
         ],
       ),
       body: Obx(() {
@@ -92,6 +97,7 @@ class _HomePostsScreenState extends State<HomePostsScreen> {
           itemBuilder: (context, index) {
             final post = posts[index];
             return PostCard(
+              id:post.id,
               title: post.title,
               body: post.body,
               isDarkMode: themeController.isDarkMode.value,
